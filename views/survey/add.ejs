@@ -1,0 +1,76 @@
+<!-- include header -->
+<% include ../partials/header.ejs %>	
+
+	<!-- display register form with register button-->
+	<main class="container">
+	
+		<h1><%= title %></h1>
+		
+		<!-- set the size -->
+		<div class="col-sm-4">
+			<form method="post">
+			<div class="bg-default">
+			* require
+				<fieldset class="form-group">
+					<label for="survey_title">Survey Title: *</label>
+					<input name="survey_title" type="text" class="form-control" required />
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="survey_questionOne">Question 1: *</label>
+					<input name="survey_questionOne" type="text" class="form-control" required />
+						<fieldset class="form-group">
+							<label for="survey_questionOne_template">Question template: *</label>
+							<select id="survey_questionOne_template" name="survey_questionOne_template" /required>
+								<option value="mc">Multiple Choice</option>
+								<option value="aORdisa">Agree/Disagree</option>
+								<option value="shortAns">Short Answer</option>
+							</select>
+						</fieldset>
+					<small>If it is a multiple choice, please write down 4 options for others to choose</small>
+					<div class="input-group">
+						<input name="survey_questionOneAnsA" type="text" class="form-control" />
+						<input name="survey_questionOneAnsB" type="text" class="form-control" />
+						<input name="survey_questionOneAnsC" type="text" class="form-control" />
+						<input name="survey_questionOneAnsD" type="text" class="form-control" />
+					</div>
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="survey_questionTwo">Question 2: *</label>
+					<input name="survey_questionTwo" type="text" class="form-control" required />
+						<fieldset class="form-group">
+							<label for="survey_questionTwo_template">Question template: *</label>
+							<select id="survey_questionTwo_template" name="survey_questionTwo_template" /required>
+								<option value="mc">Multiple Choice</option>
+								<option value="a/disa days">Agree/Disagree</option>
+								<option value="shortAns">Short Answer</option>
+							</select>
+						</fieldset>
+					<small>If it is a multiple choice, please write down 4 options for others to choose</small>
+					<div class="input-group">
+						<input name="survey_questionTwoAnsA" type="text" class="form-control" />
+						<input name="survey_questionTwoAnsB" type="text" class="form-control" />
+						<input name="survey_questionTwoAnsC" type="text" class="form-control" />
+						<input name="survey_questionTwoAnsD" type="text" class="form-control" />
+					</div>
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="lifeTime">Life Time: *</label>
+				  	<select id="lifeTime" name="lifeTime" /required>
+                		<option value="86400000">1 day</option>
+                		<option value="172800000">2 days</option>
+                		<option value="259200000">3 days</option>
+            		</select>
+				</fieldset>
+				<fieldset class="form-group text-right">
+					<button type="submit" class="btn btn-success">
+					<i class="fa fa-pencil fa-fw"></i> Submit</button>
+					<a href="/survey" title="Cancel"  class="btn btn-default">
+                    <i class="fa fa-undo"></i> Cancel
+                </a>
+				</fieldset>
+			</div>
+			</form>
+		</div>
+	</main>
+<!-- include footer -->
+<% include ../partials/footer.ejs %>

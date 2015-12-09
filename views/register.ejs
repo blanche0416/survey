@@ -1,0 +1,40 @@
+<!-- include header -->
+<% include partials/header.ejs %>	
+
+	<!-- display register form with register button-->
+	<main class="container">
+	
+	<!-- if there's any message, display it -->
+	<% if (messages.length > 0) { %>
+        <div class="alert alert-danger"><%= messages %></div>
+      <% } %>
+		<h1><%= title %></h1>
+		
+		<!-- set the size -->
+		<div class="col-sm-4">
+			<form method="post">
+			<div class="bg-default">
+			* require
+				<fieldset class="form-group">
+					<label for="username">Username: *</label>
+					<input name="username" type="text" class="form-control" required />
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="password">Password: *</label>
+					<input name="password" type="password" class="form-control" required />
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="email">Email: *</label>
+					<input name="email" type="email" class="form-control" required />
+				</fieldset>
+				<fieldset class="form-group text-right">
+					<input type="submit" class="btn btn-success" value="Register"/>
+				</fieldset>
+			</div>
+			</form>
+		</div>
+	</main>
+<!-- include boot -->
+<% include partials/boot.ejs %>
+<!-- include footer -->
+<% include partials/footer.ejs %>

@@ -1,0 +1,80 @@
+<!-- include header -->
+<% include ../partials/header.ejs %>	
+
+	<!-- display register form with register button-->
+	<main class="container">
+	
+		<h1><%= title %></h1>
+		
+		<!-- set the size -->
+		<div class="col-sm-4">
+			<form method="post">
+			<div class="bg-default">
+				<fieldset class="form-group">
+                	<label for="survey_id">Survey ID : </label>
+                	<input name="survey_id" type="text" class="form-control" value="<%= survey.survey_id %>" readonly />
+            	</fieldset>
+				<fieldset class="form-group">
+					<label for="survey_title">Survey Title : </label>
+					<input name="survey_title" type="text" class="form-control" value="<%= survey.survey_title %>" readonly />
+				</fieldset>
+				<fieldset class="form-group">
+					<label for="survey_questionOne">Question 1 : </label>
+					<input name="survey_questionOne" type="text" class="form-control" value="<%= survey.survey_questionOne %>" readonly />
+				</fieldset>
+				
+				<% if(survey.survey_questionOne_template == "mc"){ %>
+					<fieldset class="form-group">
+						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsA %>" required/> <%= survey.survey_questionOneAnsA %>
+						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsB %>" /> <%= survey.survey_questionOneAnsB %>
+						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsC %>" /> <%= survey.survey_questionOneAnsC %>
+						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsD %>" /> <%= survey.survey_questionOneAnsD %>
+					</fieldset>
+				<% } else if(survey.survey_questionOne_template == "aORdisa"){ %>
+					<fieldset class="form-group">
+						<input name="survey_questionOneAns" type="radio" value="agree" required/> Agree
+						<input name="survey_questionOneAns" type="radio" value="disagree" /> Disagree
+					</fieldset>
+				<% } else { %>
+					<fieldset class="form-group">
+						<textarea name="survey_questionOneAns" class="form-control" row="4" col="10" required></textarea>
+					</fieldset>
+				<% } %>
+
+				<fieldset class="form-group">
+					<label for="survey_questionTwo">Question 2 : </label>
+					<input name="survey_questionTwo" type="text" class="form-control" value="<%= survey.survey_questionTwo %>" readonly />
+				</fieldset>
+				<fieldset class="form-group">
+
+				<% if(survey.survey_questionTwo_template == "mc"){ %>
+					<fieldset class="form-group">
+						<input name="survey_questionTwoAnsMC" type="radio" value="A" required/> <%= survey.survey_questionTwoAnsA %>
+						<input name="survey_questionTwoAnsMC" type="radio" value="B" /> <%= survey.survey_questionTwoAnsB %>
+						<input name="survey_questionTwoAnsMC" type="radio" value="C" /> <%= survey.survey_questionTwoAnsC %>
+						<input name="survey_questionTwoAnsMC" type="radio" value="D" /> <%= survey.survey_questionTwoAnsD %>
+					</fieldset>
+				<% } else if(survey.survey_questionTwo_template == "aORdisa"){ %>
+					<fieldset class="form-group">
+						<input name="survey_questionTwoAnsADIS" type="radio" value="agree" required/> Agree
+						<input name="survey_questionTwoAnsADIS" type="radio" value="disagree" /> Disagree
+					</fieldset>
+				<% } else { %>
+					<fieldset class="form-group">
+						<textarea name="survey_questionTwoAns" class="form-control" row="4" col="10" required></textarea>
+					</fieldset>
+				<% } %>
+
+				<fieldset class="form-group text-right">
+					<button type="submit" class="btn btn-success">
+						<i class="fa fa-pencil fa-fw"></i> Submit</button>
+					<a href="/survey" title="Cancel"  class="btn btn-default">
+                    	<i class="fa fa-undo"></i> Cancel
+                	</a>
+				</fieldset>
+			</div>
+			</form>
+		</div>
+	</main>
+<!-- include footer -->
+<% include ../partials/footer.ejs %>

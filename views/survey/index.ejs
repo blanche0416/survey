@@ -1,0 +1,69 @@
+<!-- include header -->
+<% include ../partials/header.ejs %>
+
+<main class="container">
+	<h1><%= title %></h1>
+    <!-- set the table panel color-->
+    <div class="panel panel-default">
+		<div class="panel-heading">
+			<a href="/survey/view_all" title="View all">View All Surveys</a> 
+		<% if (username) { %>
+			|  <a href="/survey/add" title="Add new"><i class="fa fa-plus-circle"></i> Add new survey</a>
+		<% } %>	
+        </div>
+			<!-- create a responsive table in panel body-->
+			<div class="panel-body table-responsive">
+				<!-- if survey length is bigger than 0 -->
+				<% if (survey.length > 0) { %>
+				<!-- add a table border and table hover-->
+				<table class="table table-bordered  table-hover">
+					<!-- set the col name-->
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Posted By</th>
+							<th>Date Created</th>
+							<th>Status</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- display surveys -->
+					<% for (var i = 0; i < survey.length; i++){ %>
+						<% if(survey[i].closeAt > Number(Date.now())){ %>
+							<tr>
+								<td>
+									<%= survey[i].survey_title %>
+								</td>
+								<td>
+									<%= survey[i].username %>
+								</td>
+								<td>
+									<% var date = new Date(survey[i].created);
+									var dateString = date.toDateString() + " " + date.toLocaleTimeString(); %>
+									<%= dateString %>
+								</td>
+								<td>
+									<%= survey[i].status %>
+								</td>
+								<td>
+									<% if (username != survey[i].username) { %>
+										<a href="/survey/<%= survey[i]._id %>" title="Update" class="btn btn-info">
+											<i class="glyphicon glyphicon-search"></i> Answer this
+										</a>
+									<% } else { %>	
+										<a href="/survey/<%= survey[i]._id %>" title="Update" class="btn btn-info">
+											<i class="glyphicon glyphicon-search"></i> Detail
+										</a>
+									<% } %>	
+								</td>
+							</tr>
+						<% } %>
+					<% } %>
+					</tbody>
+				</table>
+			</div>
+			<% } %>
+		</div>
+<!-- include footer -->
+<% include ../partials/footer.ejs %>

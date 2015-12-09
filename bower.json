@@ -1,0 +1,29 @@
+{
+  "name": "FinalProject",
+  "description": "",
+  "main": "",
+  "authors": [
+    "blanche0416 <200203793@student.georgianc.on.ca>",
+    "EchoZou <200271124@student.georgianc.on.ca>",
+    "LIYANG628 <2002942044@student.georgianc.on.ca>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.5.0",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-resource": "~1.4.8"
+  }
+}

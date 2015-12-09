@@ -1,0 +1,129 @@
+<% include ../partials/header.ejs %>
+<main class="container">
+    <h1><%= title %></h1>
+    <div class="col-sm-4">
+        <form method="post">
+            <fieldset class="form-group">
+                <label for="survey_id">Survey ID : </label>
+                <input name="survey_id" type="text" class="form-control" value="<%= survey.survey_id %>" readonly />
+            </fieldset>
+            
+            <fieldset class="form-group">
+                <label for="survey_title">Survey Title : </label>
+                <input name="survey_title" type="text" class="form-control" value="<%= survey.survey_title %>" readonly />
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="survey_questionOne">Question 1 : </label>
+                <input name="survey_questionOne" type="text" class="form-control" value="<%= survey.survey_questionOne %>" readonly />
+            </fieldset>
+            
+            <% for (var i = 0; i < answer.length; i++){ %>
+                <% if(answer[i].survey_id == survey.survey_id){ %>
+                    <% var A = 0; var B = 0; var C = 0; var D = 0; %>
+                    <% if(survey.survey_questionOne_template == "mc"){ %>
+                        <% if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsA){ %>
+                            <% A++; %>
+                        <% } else if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsB){ %>
+                            <% B++; %>
+                        <% } else if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsC){ %>
+                            <% C++; %>
+                        <% } else { %>
+                            <% D++; %>
+                        <% } %>	
+                        <fieldset class="form-group">
+                            <label for="survey_questionOneAnsA">Answer 1 : <%= A %></label>
+                            <label for="survey_questionOneAnsB">Answer 2 : <%= B %></label>
+                            <label for="survey_questionOneAnsC">Answer 3 : <%= C %></label>
+                            <label for="survey_questionOneAnsD">Answer 4 : <%= D %></label>
+                        </fieldset>
+                    <% } else if(survey.survey_questionOne_template == "aORdisa"){%>
+                        <% if(answer.survey_questionOneAns == "agree"){ %>
+                            <% A++; %>
+                        <% } else { %>
+                            <% B++; %>
+                        <% } %>	
+                        <fieldset class="form-group">
+                            <label for="Agree">Agree : <%= A %></label>
+                            <label for="Disagree">Disagree : <%= B %></label>
+                        </fieldset>
+                    <% } else { %>
+                        <fieldset class="form-group">
+                            <tr>
+                                <td>
+                                    <%= answer[i].survey_questionTwoAns %>
+                                </td>
+                            </tr>
+                        </fieldset>
+                    <% } %> 
+                <% } %>
+			<% } %>
+            
+            <fieldset class="form-group">
+                <label for="survey_questionTwo">Question 2 : </label>
+                <input name="survey_questionTwo" type="text" class="form-control" value="<%= survey.survey_questionTwo %>" readonly />
+            </fieldset>
+            
+            <% for (var i = 0; i < answer.length; i++){ %>
+                <% if(answer[i].survey_id == survey.survey_id){ %>
+                    <% var A = 0; var B = 0; var C = 0; var D = 0; %>
+                    <% if(survey.survey_questionTwo_template == "mc"){ %>
+                        <% if(answer[i].survey_questionTwoAns == survey.survey_questionTwoAnsA){ %>
+                            <% A++; %>
+                        <% } else if(answer[i].survey_questionTwoAns == survey.survey_questionTwoAnsB){ %>
+                            <% B++; %>
+                        <% } else if(answer[i].survey_questionTwoAns == survey.survey_questionTwoAnsC){ %>
+                            <% C++; %>
+                        <% } else { %>
+                            <% D++; %>
+                        <% } %>	
+                        <fieldset class="form-group">
+                            <label for="survey_questionTwoAnsA">Answer 1 : <%= A %></label>
+                            <label for="survey_questionTwoAnsB">Answer 2 : <%= B %></label>
+                            <label for="survey_questionTwoAnsC">Answer 3 : <%= C %></label>
+                            <label for="survey_questionTwoAnsD">Answer 4 : <%= D %></label>
+                        </fieldset>
+                    <% } else if(survey.survey_questionTwo_template == "aORdisa"){%>
+                        <% if(answer.survey_questionTwoAns == "agree"){ %>
+                            <% A++; %>
+                        <% } else { %>
+                            <% B++; %>
+                        <% } %>	
+                        <fieldset class="form-group">
+                            <label for="Agree">Agree : <%= A %></label>
+                            <label for="Disagree">Disagree : <%= B %></label>
+                        </fieldset>
+                    <% } else { %>
+                        <fieldset class="form-group">
+                            <tr>
+                                <td>
+                                    <%= answer[i].survey_questionTwoAns %>
+                                </td>
+                            </tr>
+                        </fieldset>
+                    <% } %> 
+                <% } %>
+			<% } %>
+            
+            <fieldset class="form-group">
+                <label for="status">Status : </label>
+                <input name="status" type="text" class="form-control" value="<%= survey.status %>" readonly />
+            </fieldset>
+            
+            <fieldset class="form-group">
+                <label for="created">Create At : </label>
+                <% var date = new Date(survey.created);
+				var dateString = date.toDateString() + " " + date.toLocaleTimeString(); %>
+                <input name="created" type="text" class="form-control" value="<%= dateString %>" readonly />
+            </fieldset>
+            
+            <fieldset class="form-group text-right">
+                <a href="/survey" title="Cancel"  class="btn btn-default">
+                    <i class="fa fa-undo"></i> Cancel
+                </a>
+            </fieldset>
+        </form>
+    </div>
+</main>
+<!-- include footer -->
+<% include ../partials/footer.ejs %>

@@ -1,0 +1,48 @@
+/*body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}*/
+
+/* make h1, h2 and h3 center */
+h1, h3{
+  text-align: center;
+}
+
+/* define size and make it center */
+.bg-default{
+    width:400px;
+    margin-left:360px;
+}
+
+/* define size and make it center */
+.bg-default2{
+    padding: 15px 5px;
+    width:700px;
+    margin-left:220px;
+}
+
+/* set margin for input-group */
+.input-group{
+    margin-bottom: 5px;
+}
+
+/* setting for p*/
+p{
+    text-indent:2em;
+    font-size:20px;
+    padding-left:15px;
+}
+
+.img{
+  margin-left:290px;
+}
+
+/* set textarea's size*/
+textarea {
+    width: 500px;
+    height: 150px;
+}
