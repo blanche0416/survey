@@ -1,0 +1,28 @@
+<% include ../partials/header.ejs %>
+<main class="container">
+    <h1><%= title %></h1>
+    <div class="col-sm-4">
+        <form method="post">
+            <fieldset class="form-group">
+                <label for="username">Username: </label>
+                <input name="username" type="text" class="form-control" required value="<%= username %>" readonly />
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="email">Email: </label>
+                <input name="email" type="email" class="form-control" required value="<%= user.email %>" autofocus />
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="password">Password: *</label>
+                <input name="password" type="password" class="form-control" required />
+            </fieldset>
+            <fieldset class="form-group text-right">
+                <button type="submit" class="btn btn-success" title="Update">
+                    <i class="fa fa-pencil-square-o"></i> Update</button>
+                <a href="/survey" title="Cancel"  class="btn btn-default">
+                    <i class="fa fa-undo"></i>  Cancel
+                </a>
+            </fieldset>
+        </form>
+    </div>
+</main>
+<% include ../partials/footer.ejs %>

@@ -26,8 +26,11 @@
 				<% if(survey.survey_questionOne_template == "mc"){ %>
 					<fieldset class="form-group">
 						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsA %>" required/> <%= survey.survey_questionOneAnsA %>
+						<br />
 						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsB %>" /> <%= survey.survey_questionOneAnsB %>
+						<br />
 						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsC %>" /> <%= survey.survey_questionOneAnsC %>
+						<br />
 						<input name="survey_questionOneAns" type="radio" value="<%= survey.survey_questionOneAnsD %>" /> <%= survey.survey_questionOneAnsD %>
 					</fieldset>
 				<% } else if(survey.survey_questionOne_template == "aORdisa"){ %>
@@ -50,8 +53,11 @@
 				<% if(survey.survey_questionTwo_template == "mc"){ %>
 					<fieldset class="form-group">
 						<input name="survey_questionTwoAnsMC" type="radio" value="A" required/> <%= survey.survey_questionTwoAnsA %>
+						<br />
 						<input name="survey_questionTwoAnsMC" type="radio" value="B" /> <%= survey.survey_questionTwoAnsB %>
+						<br />
 						<input name="survey_questionTwoAnsMC" type="radio" value="C" /> <%= survey.survey_questionTwoAnsC %>
+						<br />
 						<input name="survey_questionTwoAnsMC" type="radio" value="D" /> <%= survey.survey_questionTwoAnsD %>
 					</fieldset>
 				<% } else if(survey.survey_questionTwo_template == "aORdisa"){ %>

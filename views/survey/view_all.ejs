@@ -17,20 +17,20 @@
 				<% if (survey.length > 0) { %>
 				<!-- add a table border and table hover-->
 				<table class="table table-bordered  table-hover">
-					<!-- set the col name-->
-					<thead>
-						<tr>
-							<th>Title</th>
-							<th>Posted By</th>
-							<th>Date Created</th>
-							<th>Status</th>
-							<th></th>
-							
-						</tr>
-					</thead>
-					<tbody>
-					<!-- display incident description in the right col-->
 					<% for (var i = 0; i < survey.length; i++){ %>
+						<!-- set the col name-->
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Posted By</th>
+								<th>Date Created</th>		
+								<% if (username == survey[i].username) { %>
+									<th></th>	
+								<% } %>		
+							</tr>
+						</thead>
+						<tbody>
+						<!-- display survey description in the right col-->
 							<tr>
 								<td>
 									<%= survey[i].survey_title %>
@@ -44,14 +44,7 @@
 									<%= dateString %>
 								</td>
 								<td>
-									<%= survey[i].status %>
-								</td>
-								<td>
-									<% if (username != survey[i].username) { %>
-										<a href="/survey/<%= survey[i]._id %>" title="Update" class="btn btn-info">
-											<i class="glyphicon glyphicon-search"></i> Answer this
-										</a>
-									<% } else { %>	
+									<% if (username == survey[i].username) { %>
 										<a href="/survey/<%= survey[i]._id %>" title="Update" class="btn btn-info">
 											<i class="glyphicon glyphicon-search"></i> Detail
 										</a>

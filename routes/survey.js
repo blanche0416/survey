@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Survey = require('../models/survey');
 var Answer = require('../models/answer');
+var User = require('../models/user');
 
 //utility functin to check if user is authenticatd
 function requireAuth(req, res, next){
@@ -25,13 +26,26 @@ router.get('/', function (req, res, next) {
         }
         else {
         Answer.find(function (err, answer) {
-            res.render('survey/index', {
-                title: 'Active Survey List',       
-                survey: survey,      
-                answer: answer,
-                username: req.user ? req.user.username : ''
-  
-            });
+            if (err) {
+                console.log(err);
+                res.end(err);
+            }
+            else {
+                User.find(function (err, user) {
+                    if (err) {
+                        console.log(err);
+                        res.end(err);
+                    }
+                    else{
+                    res.render('survey/index', {
+                        title: 'Active Survey List',       
+                        survey: survey,      
+                        answer: answer,
+                        user: user,
+                        username: req.user ? req.user.username : ''
+                    })}
+                });
+            }
         });
         }
     });
@@ -47,13 +61,26 @@ router.get('/view_all', function (req, res, next) {
         }
         else {
         Answer.find(function (err, answer) {
-            res.render('survey/view_all', {
-                title: 'All Surveys',
-                survey: survey,
-                answer: answer,
-                username: req.user ? req.user.username : ''
-         
-            });
+            if (err) {
+                console.log(err);
+                res.end(err);
+            }
+            else {
+                User.find(function (err, user) {
+                    if (err) {
+                        console.log(err);
+                        res.end(err);
+                    }
+                    else{
+                    res.render('survey/view_all', {
+                        title: 'All Survey List',       
+                        survey: survey,      
+                        answer: answer,
+                        user: user,
+                        username: req.user ? req.user.username : ''
+                    })}
+                });
+            }
         });
         }
     });
@@ -61,10 +88,17 @@ router.get('/view_all', function (req, res, next) {
 
 //render add new survey Page
 router.get('/add', requireAuth, function (req, res, next) {
-    res.render('survey/add', {
-        title: 'Add new survey here',
-        username: req.user ? req.user.username : ''
-   
+    User.find(function (err, user) {
+    if (err) {
+        console.log(err);
+        res.end(err);
+    }
+    else{
+        res.render('survey/add', {
+            title: 'Add new survey here',
+            user: user,
+            username: req.user ? req.user.username : ''
+        })}
     });
 });
 
@@ -190,24 +224,41 @@ router.get('/:id',  function (req, res, next) {
             res.end(err);
         }
         else {
-            if(req.user ? req.user.username : '' == survey.username){
+            User.find(function (err, user) {
+            if(user.username == survey.username){
                 Answer.find(function (err, answer) {
-                    res.render('survey/detail', {
-                        title: 'Survey detail',
-                        survey: survey,
-                        answer: answer,
-                        username: req.user ? req.user.username : ''       
-                    });
-                });
-            }
+                    if (err) {
+                        console.log(err);
+                        res.end(err);
+                    }
+                    else {
+                        User.find(function (err, user) {
+                            res.render('survey/detail', {
+                                title: 'Survey detail',
+                                survey: survey,
+                                answer: answer,
+                                user: user,
+                                username: req.user ? req.user.username : ''   
+                            })  
+                        })
+                    }})}
             else{
-                    res.render('survey/answer', {
+                User.find(function (err, user) {
+                    if (err) {
+                            console.log(err);
+                            res.end(err);
+                        }
+                    else{
+                        res.render('survey/answer', {
                         title: 'Answer the survey',
                         survey: survey,
-                        username: req.user ? req.user.username : ''       
-                    });
-                };
-            }
+                        user: user,
+                        username: req.user ? req.user.username : ''
+                        });
+                    }
+                })
+            };
+        })}
     });
 });
 

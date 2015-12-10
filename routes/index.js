@@ -3,7 +3,6 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
-
 //render home page and define username
 router.get('/', function (req, res, next) {
     res.render('index', {

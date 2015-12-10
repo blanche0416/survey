@@ -19,34 +19,27 @@
             </fieldset>
             
             <% for (var i = 0; i < answer.length; i++){ %>
+            <% var A = 0; var B = 0; var C = 0; var D = 0; var total = 0;%>
                 <% if(answer[i].survey_id == survey.survey_id){ %>
-                    <% var A = 0; var B = 0; var C = 0; var D = 0; %>
+                    
                     <% if(survey.survey_questionOne_template == "mc"){ %>
                         <% if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsA){ %>
-                            <% A++; %>
+                            <% A++; total++; %>
                         <% } else if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsB){ %>
-                            <% B++; %>
+                            <% B++; total++; %>
                         <% } else if(answer[i].survey_questionOneAns == survey.survey_questionOneAnsC){ %>
-                            <% C++; %>
+                            <% C++; total++; %>
                         <% } else { %>
-                            <% D++; %>
+                            <% D++; total++; %>
                         <% } %>	
-                        <fieldset class="form-group">
-                            <label for="survey_questionOneAnsA">Answer 1 : <%= A %></label>
-                            <label for="survey_questionOneAnsB">Answer 2 : <%= B %></label>
-                            <label for="survey_questionOneAnsC">Answer 3 : <%= C %></label>
-                            <label for="survey_questionOneAnsD">Answer 4 : <%= D %></label>
-                        </fieldset>
+                        
                     <% } else if(survey.survey_questionOne_template == "aORdisa"){%>
                         <% if(answer.survey_questionOneAns == "agree"){ %>
-                            <% A++; %>
+                            <% A++; total++; %>
                         <% } else { %>
-                            <% B++; %>
+                            <% B++; total++; %>
                         <% } %>	
-                        <fieldset class="form-group">
-                            <label for="Agree">Agree : <%= A %></label>
-                            <label for="Disagree">Disagree : <%= B %></label>
-                        </fieldset>
+                        
                     <% } else { %>
                         <fieldset class="form-group">
                             <tr>
@@ -58,6 +51,20 @@
                     <% } %> 
                 <% } %>
 			<% } %>
+            
+            <% if(survey.survey_questionOne_template == "mc"){ %>
+                <fieldset class="form-group">
+                        <label for="survey_questionOneAnsA">Answer 1 : <%= A %></label>
+                        <label for="survey_questionOneAnsB">Answer 2 : <%= B %></label>
+                        <label for="survey_questionOneAnsC">Answer 3 : <%= C %></label>
+                        <label for="survey_questionOneAnsD">Answer 4 : <%= D %></label>
+                </fieldset>
+            <% } else if(survey.survey_questionOne_template == "aORdisa"){%>    
+                <fieldset class="form-group">
+                        <label for="Agree">Agree : <%= A %></label>
+                        <label for="Disagree">Disagree : <%= B %></label>
+                </fieldset>
+            <% } %>
             
             <fieldset class="form-group">
                 <label for="survey_questionTwo">Question 2 : </label>
@@ -104,11 +111,6 @@
                     <% } %> 
                 <% } %>
 			<% } %>
-            
-            <fieldset class="form-group">
-                <label for="status">Status : </label>
-                <input name="status" type="text" class="form-control" value="<%= survey.status %>" readonly />
-            </fieldset>
             
             <fieldset class="form-group">
                 <label for="created">Create At : </label>

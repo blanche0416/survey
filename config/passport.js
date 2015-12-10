@@ -77,7 +77,6 @@ module.exports = function(passport) {
 						//create the user with user info
 						var newUser = new User(req.body);
 						newUser.password = newUser.generateHash(newUser.password);
-						newUser.usertype = 'member',
 						newUser.created = Date.now();
 						newUser.save(function(err) {
 							if(err) {

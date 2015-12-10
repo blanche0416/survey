@@ -25,7 +25,7 @@ db.once('open', function (callback) {
 
 //route alias
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/users');
 var survey = require('./routes/survey');
 
 
@@ -58,7 +58,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/survey', survey);
 
 

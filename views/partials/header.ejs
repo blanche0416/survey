@@ -35,18 +35,26 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          
             <% if(title == "Survey list" ) { %>
               <li class="active">
                 <% } else { %>
               <li>
                 <% } %>
                   <a href="/survey"><i class="fa fa-book fa-fw"></i> Survey list</a></li>
-                     <% if (username) { %>
-              <li class="navbar-text"><i class="glyphicon glyphicon-user"></i> Welcome,
-                <%= username %>
-              </li>
-              <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+            <% if (username) { %>
+            <% for (var i = 0; i < user.length; i++){ %>
+              <% if(user[i].username == username){ %>
+              <% if(title == "Edit User Info" ) { %>
+                
+                        <li class="active">
+                          <% } else { %>
+                        <li>
+                          <% } %>
+                          <a href="/user/<%= user[i]._id %>"><i class="glyphicon glyphicon-user"></i> 
+                          Welcome,<%= username %></a></li>
+                      <% } %>
+                    <% } %>
+                <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
             <% } else { %>
               <% if(title == "Register" ) { %>
                 <li class="active">

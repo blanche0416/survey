@@ -12,41 +12,42 @@ function requireAuth(req, res, next){
   if(!req.isAuthenticated()){
     res.redirect('/login');
   }
-  else{
-      res.redirect('/survey');
-  }
   next();
 }
 
-//render user list page
-router.get('/', requireAuth, function (req, res, next) {
-    User.find(function (err, users) {
-        //if any err, console the it
+router.get('/:id', requireAuth, function (req, res, next) {
+    //create id
+    var id = req.params.id;
+    User.findById(id, function (err, user) {
+        //if any err, console it
         if (err) {
             console.log(err);
             res.end(err);
         }
         else {
-            res.render('user/index', {
-                title: 'User List',
-                users: users,
-                username: req.user ? req.user.username : '',
-       
-        });
-        }
+            res.render('user/edit', {
+                title: 'Edit User Info',
+                user: user,
+                username: req.user ? req.user.username : ''       
+            });
+        };
     });
 });
 
-//delete selected user
-router.get('/delete/:id', requireAuth, function (req, res, next) {
+router.post('/:id', requireAuth, function (req, res, next) {
     var id = req.params.id;
-    User.remove({ _id: id }, function (err) {
+    var user = new User(req.body);
+    user.password = user.generateHash(user.password);
+    user._id = id;
+    user.updated = Date.now();
+
+    User.update({ _id: id }, user, function (err) {
         if (err) {
             console.log(err);
             res.end(err);
         }
         else {
-            res.redirect('/users');
+            res.redirect('/survey');
         }
     });
 });
