@@ -1,3 +1,8 @@
+//File name: app.js
+//Author's name: Pui In Kwok, Mo Zou, Yang Li
+//Web site name: final project
+//File description: Register all the application's modules, additions for authentication,
+//                  connect to database, route alias and setup for material
 
 //register all the application's modules
 var express = require('express');

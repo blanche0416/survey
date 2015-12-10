@@ -1,3 +1,9 @@
+//File name: survey.js
+//Author's name: Pui In Kwok, Mo Zou, Yang Li 
+//Web site name: final project
+//File description: router for active survey, view all survey, add survey page.
+
+//import require material
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
@@ -102,7 +108,7 @@ router.get('/add', requireAuth, function (req, res, next) {
     });
 });
 
-//process add new survey
+//process add new survey, depend on user choices
 router.post('/add',  requireAuth, function (req, res, next) {
     var survey = new Survey(req.body);
     var time = Date.now();
@@ -224,44 +230,28 @@ router.get('/:id',  function (req, res, next) {
             res.end(err);
         }
         else {
-            User.find(function (err, user) {
-            if(user.username == survey.username){
-                Answer.find(function (err, answer) {
-                    if (err) {
-                        console.log(err);
-                        res.end(err);
+            Answer.find(function (err, answer) {
+                if (err) {
+                    console.log(err);
+                    res.end(err);
                     }
-                    else {
-                        User.find(function (err, user) {
-                            res.render('survey/detail', {
-                                title: 'Survey detail',
-                                survey: survey,
-                                answer: answer,
-                                user: user,
-                                username: req.user ? req.user.username : ''   
-                            })  
-                        })
-                    }})}
-            else{
-                User.find(function (err, user) {
-                    if (err) {
-                            console.log(err);
-                            res.end(err);
-                        }
-                    else{
-                        res.render('survey/answer', {
-                        title: 'Answer the survey',
-                        survey: survey,
-                        user: user,
-                        username: req.user ? req.user.username : ''
-                        });
-                    }
-                })
-            };
-        })}
+                else {
+                    User.find(function (err, user) {
+                        res.render('survey/detail', {
+                            title: 'Survey detail',
+                            survey: survey,
+                            answer: answer,
+                            user: user,
+                            username: req.user ? req.user.username : ''   
+                        })  
+                    })
+                }
+            })
+        }
     });
 });
 
+//process the answer form submission
 router.post('/:id', function (req, res, next) {
     var id = req.params.id;
     var answer = new Answer(req.body); 

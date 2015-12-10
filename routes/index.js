@@ -1,3 +1,8 @@
+//File name: index.js
+//Author's name: Pui In Kwok, Mo Zou, Yang Li 
+//Web site name: final project
+//File description: router for index, login, register page
+
 //import require material
 var express = require('express');
 var passport = require('passport');

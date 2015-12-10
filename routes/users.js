@@ -1,3 +1,8 @@
+//File name: user.js
+//Author's name: Pui In Kwok, Mo Zou, Yang Li 
+//Web site name: final project
+//File description: router for edit user info page.
+
 //import require material
 var express = require('express');
 var passport = require('passport');
@@ -15,6 +20,7 @@ function requireAuth(req, res, next){
   next();
 }
 
+//render edit user info page
 router.get('/:id', requireAuth, function (req, res, next) {
     //create id
     var id = req.params.id;
@@ -34,6 +40,7 @@ router.get('/:id', requireAuth, function (req, res, next) {
     });
 });
 
+//process update form submission
 router.post('/:id', requireAuth, function (req, res, next) {
     var id = req.params.id;
     var user = new User(req.body);
