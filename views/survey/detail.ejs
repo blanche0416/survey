@@ -34,7 +34,7 @@
                     <table class="table table-bordered  table-hover">
                             <thead>
                                 <tr>
-                                    <th>Answer for Question 1</th>
+                                    <th>Answer other chose for Question 1</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,22 +55,26 @@
                         <label for="survey_questionTwo">Question 2 : </label>
                         <input name="survey_questionTwo" type="text" class="form-control" value="<%= survey.survey_questionTwo %>" readonly />
                     </fieldset>
-                    
-                    <% for (var i = 0; i < answer.length; i++){ %>
-                        <% if(answer[i].survey_id == survey.survey_id){ %>
+
+                    <% if(answer.length > 0){ %>
+                    <table class="table table-bordered  table-hover">
                             <thead>
                                 <tr>
-                                    <th>Answer for Question 2</th>
+                                    <th>Answer other chose for Question 2</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <%= answer[i].survey_questionTwoAns %>
-                                    </td>
-                                </tr>
+                                <% for (var i = 0; i < answer.length; i++){ %>
+                                    <% if(answer[i].survey_id == survey.survey_id){ %>
+                                        <tr>
+                                            <td>
+                                                <%= answer[i].survey_questionTwoAns %>
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                <% } %>
                             </tbody>
-                        <% } %>
+                        </table>
                     <% } %>
                     
                     <fieldset class="form-group">
