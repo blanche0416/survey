@@ -7,13 +7,21 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var User = require('../models/user');
 
 //render home page and define username
 router.get('/', function (req, res, next) {
-    res.render('index', {
-        title: 'Survey Cans',
-        username: req.user ? req.user.username : ''
-     
+    User.find(function (err, user) {
+        if (err) {
+            console.log(err);
+            res.end(err);
+        }
+        else{        
+            res.render('index', {
+            title: 'Survey Cans',
+            user: user,
+            username: req.user ? req.user.username : ''
+       })}
     });
 });
 

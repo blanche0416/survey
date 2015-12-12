@@ -20,6 +20,24 @@ function requireAuth(req, res, next){
   next();
 }
 
+//render user list page
+router.get('/', requireAuth, function (req, res, next) {
+    User.find(function (err, user) {
+        //if any err, console the it
+        if (err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {
+            res.render('user/index', {
+                title: 'Edit User Info',
+                user: user,
+                username: req.user ? req.user.username : ''            
+        });
+        }
+    });
+});
+
 //render edit user info page
 router.get('/:id', requireAuth, function (req, res, next) {
     //create id

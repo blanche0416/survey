@@ -9,7 +9,7 @@
 <% include ../partials/header.ejs %>
 <main class="container">
     <h1><%= title %></h1>
-    <!-- if user is the one who create the survey -->
+    <!-- if user is the one who created the survey -->
     <% if (username == survey.username) { %>
         <!-- set the size -->
         <div class="col-sm-4">
@@ -19,7 +19,7 @@
                         <label for="survey_id">Survey ID : </label>
                         <input name="survey_id" type="text" class="form-control" value="<%= survey.survey_id %>" readonly />
                     </fieldset>
-                    
+                     <div id="printableArea"> 
                     <fieldset class="form-group">
                         <label for="survey_title">Survey Title : </label>
                         <input name="survey_title" type="text" class="form-control" value="<%= survey.survey_title %>" readonly />
@@ -76,7 +76,7 @@
                             </tbody>
                         </table>
                     <% } %>
-                    
+                    </div>
                     <fieldset class="form-group">
                         <label for="created">Create At : </label>
                         <% var date = new Date(survey.created);
@@ -84,7 +84,20 @@
                         <input name="created" type="text" class="form-control" value="<%= dateString %>" readonly />
                     </fieldset>
                     
+            <script>
+                function printDiv(divName) {
+                    var printContents = document.getElementById(divName).innerHTML;
+                    var originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    window.print();
+                    document.body.innerHTML = originalContents;
+                }
+            </script>
+<!-- Print Code reference: http://stackoverflow.com/questions/16894683/how-to-print-html-content-on-click-of-a-button-but-not-the-page  -->          
+                    
                     <fieldset class="form-group text-right">
+                        <button onclick="printDiv('printableArea')" class="btn btn-warning">
+                        <i class="fa fa-print fa-fw"></i> Print</button> 
                         <a href="/survey" title="Cancel"  class="btn btn-default">
                             <i class="fa fa-undo"></i> Cancel
                         </a>
@@ -158,6 +171,9 @@
                             <textarea name="survey_questionTwoAns" class="form-control" row="4" col="10" required></textarea>
                         </fieldset>
                     <% } %>
+
+
+                    
     
                     <fieldset class="form-group text-right">
                         <button type="submit" class="btn btn-success">
